@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { Phone } from "lucide-react";
 import { CTABand } from "@/components/sections/cta-band";
 import { WhyCrystalCoat } from "@/components/sections/why-crystal-coat";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About — Mobile Detailing in BC",
   description:
-    "Crystal Coat Mobile is a premium mobile detailing service based in Port Coquitlam. Deep interior cleaning, high-quality exterior detailing — done at your driveway.",
+    "Crystal Coat Mobile is a premium mobile detailing service in Port Coquitlam, BC. Deep interior cleaning, hand-detailed exterior — done at your driveway by Luc and Sam.",
   alternates: { canonical: "/about" },
 };
 
@@ -31,6 +32,12 @@ const TEAM = [
 export default function AboutPage() {
   return (
     <>
+      <BreadcrumbSchema
+        trail={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ]}
+      />
       <section
         aria-label="About hero"
         data-hero

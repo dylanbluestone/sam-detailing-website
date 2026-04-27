@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { LocalBusinessSchema } from "@/components/seo/local-business-schema";
 import { Toaster } from "@/components/ui/sonner";
 import { SITE } from "@/lib/site";
 
@@ -24,8 +25,8 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — ${SITE.tagline}`,
-    template: `%s | ${SITE.name}`,
+    default: `Mobile Auto Detailing in Port Coquitlam | Crystal Coat Mobile`,
+    template: `%s | Crystal Coat Mobile`,
   },
   description: SITE.description,
   applicationName: SITE.name,
@@ -76,6 +77,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${plusJakartaSans.variable} min-h-full flex flex-col bg-background text-foreground`}
       >
+        <LocalBusinessSchema />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

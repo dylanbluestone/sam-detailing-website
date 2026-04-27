@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { LocationLanding } from "@/components/sections/location-landing";
 
 export const metadata: Metadata = {
-  title: "Mobile Auto Detailing in Port Coquitlam, BC",
+  title: "Port Coquitlam Mobile Detailing",
   description:
-    "Premium mobile auto detailing in Port Coquitlam — Birchland Manor, Riverwood, Lincoln Park, Citadel Heights, Mary Hill. Hand wash, full interior steam, paint sealant. Book online.",
+    "Premium mobile auto detailing in Port Coquitlam, BC — Birchland Manor, Riverwood, Lincoln Park, Citadel Heights, Mary Hill. Hand wash, steam clean, paint sealant.",
   alternates: { canonical: "/mobile-detailing-port-coquitlam" },
 };
 
@@ -20,6 +20,7 @@ export default function PortCoquitlamPage() {
         "Mary Hill",
       ]}
       mapQuery="Port Coquitlam, BC, Canada"
+      path="/mobile-detailing-port-coquitlam"
     />
   );
 }

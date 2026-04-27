@@ -9,17 +9,18 @@ import { GalleryPreview } from "@/components/sections/gallery-preview";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { ServicesPreview } from "@/components/sections/services-preview";
 import { WhyCrystalCoat } from "@/components/sections/why-crystal-coat";
+import { FAQSchema } from "@/components/seo/faq-schema";
 import { FAQS } from "@/lib/faqs";
 import { getGalleryImages } from "@/lib/gallery";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
-    absolute: `${SITE.name} — Mobile Auto Detailing in Port Coquitlam & Coquitlam`,
+    absolute: "Mobile Detailing in Port Coquitlam | Crystal Coat Mobile",
   },
   description:
-    "Premium mobile auto detailing in Port Coquitlam and Coquitlam. We come to your driveway. Hand wash, full interior steam clean, paint sealant. Book online — pay in person.",
-  alternates: { canonical: SITE.url },
+    "Premium mobile auto detailing in Port Coquitlam & Coquitlam, BC. Hand wash, interior steam clean, paint sealant — done at your driveway. Book online today.",
+  alternates: { canonical: "/" },
 };
 
 const HOME_FAQ_SLUGS = new Set([
@@ -36,6 +37,7 @@ export default function HomePage() {
 
   return (
     <>
+      <FAQSchema items={homeFaqs} id="schema-faq-home" />
       {/* SECTION 1 — HERO */}
       <section
         aria-label="Hero"

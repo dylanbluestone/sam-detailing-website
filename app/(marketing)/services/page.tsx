@@ -3,13 +3,14 @@ import Link from "next/link";
 import { ArrowRight, Check, Minus, Sparkles } from "lucide-react";
 
 import { CTABand } from "@/components/sections/cta-band";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { ADD_ONS, PACKAGES, VEHICLE_LABELS, type Package } from "@/lib/services";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Services & Pricing",
+  title: "Detailing Packages & Pricing",
   description:
-    "Three mobile detailing packages — Express Clean, Full Detail, Premium Detail. Vehicle-type pricing, transparent add-ons, no deposits. Port Coquitlam + Coquitlam, BC.",
+    "Compare three mobile detailing packages — Express Clean, Full Detail, Premium Detail. Sedan, SUV, and truck pricing. No deposits — pay in person on the day.",
   alternates: { canonical: "/services" },
 };
 
@@ -72,6 +73,12 @@ const COMPARISON_ROWS: ComparisonRow[] = [
 export default function ServicesPage() {
   return (
     <>
+      <BreadcrumbSchema
+        trail={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+        ]}
+      />
       {/* Hero */}
       <section
         aria-label="Services hero"

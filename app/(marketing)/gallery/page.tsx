@@ -15,12 +15,13 @@
 import type { Metadata } from "next";
 import { CTABand } from "@/components/sections/cta-band";
 import { GalleryGrid } from "@/components/gallery/gallery-grid";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { getGalleryImages } from "@/lib/gallery";
 
 export const metadata: Metadata = {
-  title: "Gallery — Mobile Detailing Work",
+  title: "Detailing Gallery — Real Cars",
   description:
-    "Real before-and-afters from Crystal Coat Mobile. Hand-detailed in Port Coquitlam and Coquitlam, BC.",
+    "Real before-and-afters from Crystal Coat Mobile. Hand-detailed in Port Coquitlam & Coquitlam — exterior, interior steam, paint sealant. See our recent work.",
   alternates: { canonical: "/gallery" },
 };
 
@@ -29,6 +30,12 @@ export default function GalleryPage() {
 
   return (
     <>
+      <BreadcrumbSchema
+        trail={[
+          { name: "Home", path: "/" },
+          { name: "Gallery", path: "/gallery" },
+        ]}
+      />
       <section
         aria-label="Gallery hero"
         data-hero

@@ -1,17 +1,27 @@
 import type { Metadata } from "next";
 import { CTABand } from "@/components/sections/cta-band";
 import { FAQSection } from "@/components/sections/faq-section";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { FAQSchema } from "@/components/seo/faq-schema";
+import { FAQS } from "@/lib/faqs";
 
 export const metadata: Metadata = {
-  title: "FAQ",
+  title: "FAQ — Mobile Detailing Questions",
   description:
-    "Common questions about Crystal Coat Mobile — pricing, service area, scheduling, payment, pet hair, and more.",
+    "Mobile detailing pricing, service area, evening and weekend scheduling, payment methods, pet hair removal, paint sealant — common questions answered honestly.",
   alternates: { canonical: "/faq" },
 };
 
 export default function FAQPage() {
   return (
     <>
+      <FAQSchema items={FAQS} id="schema-faq-page" />
+      <BreadcrumbSchema
+        trail={[
+          { name: "Home", path: "/" },
+          { name: "FAQ", path: "/faq" },
+        ]}
+      />
       <section
         aria-label="FAQ hero"
         data-hero

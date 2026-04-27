@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { LocationLanding } from "@/components/sections/location-landing";
 
 export const metadata: Metadata = {
-  title: "Mobile Auto Detailing in Coquitlam, BC",
+  title: "Coquitlam Mobile Detailing",
   description:
-    "Premium mobile auto detailing in Coquitlam — Burke Mountain, Westwood Plateau, Maillardville, City Centre, Eagle Ridge. Hand wash, full interior steam, paint sealant. Book online.",
+    "Premium mobile auto detailing in Coquitlam, BC — Burke Mountain, Westwood Plateau, Maillardville, City Centre, Eagle Ridge. Hand wash, steam clean, paint sealant.",
   alternates: { canonical: "/mobile-detailing-coquitlam" },
 };
 
@@ -20,6 +20,7 @@ export default function CoquitlamPage() {
         "Eagle Ridge",
       ]}
       mapQuery="Coquitlam, BC, Canada"
+      path="/mobile-detailing-coquitlam"
     />
   );
 }

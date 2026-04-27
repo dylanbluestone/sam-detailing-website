@@ -4,9 +4,10 @@ import { ArrowRight, CheckCircle2, Phone } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Booking received",
+  title: "Booking Received",
   description:
-    "We received your booking request. We'll reply within a few hours to confirm.",
+    "Thanks — your booking request is in. We'll reply by email or text within a few hours to confirm your time. Crystal Coat Mobile Auto Spa, Port Coquitlam BC.",
+  alternates: { canonical: "/book/thank-you" },
   robots: { index: false, follow: false },
 };
 

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: `Privacy policy for ${SITE.name} — what we collect, how we use it, and your rights under PIPA (BC) and PIPEDA.`,
+  description:
+    "Privacy policy for Crystal Coat Mobile Auto Spa: what we collect, how we use it, third parties, your rights under PIPA (BC) and PIPEDA, and contact details.",
   alternates: { canonical: "/privacy" },
 };
 
@@ -13,6 +15,12 @@ const LAST_UPDATED = "April 2026";
 export default function PrivacyPage() {
   return (
     <article className="bg-bone py-20 lg:py-28">
+      <BreadcrumbSchema
+        trail={[
+          { name: "Home", path: "/" },
+          { name: "Privacy Policy", path: "/privacy" },
+        ]}
+      />
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pt-10">
         <p className="font-display text-[11px] font-bold tracking-[0.32em] uppercase text-gold">
           Legal

@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Phone, Sparkles } from "lucide-react";
 import { CTABand } from "@/components/sections/cta-band";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact & Hours",
   description:
-    "Reach Crystal Coat Mobile — phone, email, hours, and service area in Port Coquitlam and Coquitlam, BC.",
+    "Reach Crystal Coat Mobile by phone or text — Luc 236-878-9312 or Sam 604-788-3116. Email, business hours, and service area covering Port Coquitlam & Coquitlam, BC.",
   alternates: { canonical: "/contact" },
 };
 
@@ -17,6 +18,12 @@ const MAP_EMBED_URL =
 export default function ContactPage() {
   return (
     <>
+      <BreadcrumbSchema
+        trail={[
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ]}
+      />
       <section
         aria-label="Contact hero"
         data-hero

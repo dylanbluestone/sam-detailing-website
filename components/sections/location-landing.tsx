@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ArrowRight, Check, Clock, Phone, Sparkles, Truck } from "lucide-react";
 import { CTABand } from "@/components/sections/cta-band";
 import { FAQSection } from "@/components/sections/faq-section";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { FAQSchema } from "@/components/seo/faq-schema";
 import { FAQS } from "@/lib/faqs";
 import { PACKAGES } from "@/lib/services";
 import { SITE } from "@/lib/site";
@@ -16,18 +18,28 @@ export type LocationLandingProps = {
   city: string;
   neighborhoods: readonly string[];
   mapQuery: string;
+  /** Path used in the breadcrumb's last segment, e.g. "/mobile-detailing-port-coquitlam". */
+  path: string;
 };
 
 export function LocationLanding({
   city,
   neighborhoods,
   mapQuery,
+  path,
 }: LocationLandingProps) {
   const localFaqs = FAQS.filter((f) => LOCAL_FAQ_QUESTIONS.has(f.q));
   const mapEmbed = `https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&t=&z=12&ie=UTF8&iwloc=&output=embed`;
 
   return (
     <>
+      <FAQSchema items={localFaqs} id={`schema-faq-${path}`} />
+      <BreadcrumbSchema
+        trail={[
+          { name: "Home", path: "/" },
+          { name: `${city} Mobile Detailing`, path },
+        ]}
+      />
       <section
         aria-label={`Mobile detailing in ${city} hero`}
         data-hero

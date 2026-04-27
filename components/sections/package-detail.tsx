@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Check, Clock, Sparkles } from "lucide-react";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { ServiceSchema } from "@/components/seo/service-schema";
 import { ADD_ONS, PACKAGES, VEHICLE_LABELS, type Package } from "@/lib/services";
 
 const BEST_FOR: Record<Package["slug"], string> = {
@@ -22,6 +24,14 @@ export function PackageDetail({ pkg }: { pkg: Package }) {
 
   return (
     <>
+      <ServiceSchema pkg={pkg} />
+      <BreadcrumbSchema
+        trail={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: pkg.name, path: `/services/${pkg.slug}` },
+        ]}
+      />
       <section
         aria-label={`${pkg.name} hero`}
         data-hero

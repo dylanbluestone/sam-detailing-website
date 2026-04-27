@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { Clock, Phone, ShieldCheck, Truck } from "lucide-react";
 import { BookingForm } from "@/components/booking/booking-form";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Book Your Detail",
+  title: "Book Your Mobile Detail",
   description:
-    "Request a mobile detailing appointment in Port Coquitlam or Coquitlam. We'll confirm by email or phone within a few hours.",
+    "Request a mobile detailing appointment in Port Coquitlam or Coquitlam. We'll confirm by email or phone within a few hours. No payment until the work is done.",
+  alternates: { canonical: "/book" },
 };
 
 export default async function BookPage({
@@ -21,6 +23,12 @@ export default async function BookPage({
 
   return (
     <div className="bg-bone">
+      <BreadcrumbSchema
+        trail={[
+          { name: "Home", path: "/" },
+          { name: "Book", path: "/book" },
+        ]}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pb-24">
         <div className="max-w-3xl">
           <p className="font-display text-[11px] font-bold tracking-[0.3em] uppercase text-gold">

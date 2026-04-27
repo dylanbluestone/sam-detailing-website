@@ -5,7 +5,8 @@ const pkg = findPackage("premium-detail");
 
 export const metadata: Metadata = {
   title: `${pkg.name} — From $${pkg.startingPrice}`,
-  description: `${pkg.tagline} ${pkg.description} Mobile detailing in Port Coquitlam and Coquitlam, BC.`,
+  description:
+    "Full interior steam, deep carpet shampoo, leather conditioning, clay bar, paint sealant. 1–2 month protection. Premium mobile detail from $279, Port Coquitlam.",
   alternates: { canonical: "/services/premium-detail" },
 };
 

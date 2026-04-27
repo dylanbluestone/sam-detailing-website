@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: `Terms of service for ${SITE.name} — booking, cancellations, pricing, payment, liability, and weather rescheduling.`,
+  description:
+    "Terms of service for Crystal Coat Mobile: bookings, 24h cancellation notice, pricing, payment, liability, weather rescheduling, BC governing law.",
   alternates: { canonical: "/terms" },
 };
 
@@ -13,6 +15,12 @@ const LAST_UPDATED = "April 2026";
 export default function TermsPage() {
   return (
     <article className="bg-bone py-20 lg:py-28">
+      <BreadcrumbSchema
+        trail={[
+          { name: "Home", path: "/" },
+          { name: "Terms of Service", path: "/terms" },
+        ]}
+      />
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pt-10">
         <p className="font-display text-[11px] font-bold tracking-[0.32em] uppercase text-gold">
           Legal
