@@ -18,8 +18,7 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background:
-            "radial-gradient(ellipse at 50% 30%, #0B2545 0%, #0A0A0A 75%)",
+          background: "linear-gradient(180deg, #0B2545 0%, #0A0A0A 100%)",
           color: "#FFFFFF",
           fontFamily: "system-ui, sans-serif",
           padding: "80px",
@@ -30,48 +29,23 @@ export default function OpenGraphImage() {
           style={{
             display: "flex",
             color: "#C9A227",
-            fontSize: 18,
-            letterSpacing: 8,
-            textTransform: "uppercase",
-            fontWeight: 700,
-            marginBottom: 32,
-          }}
-        >
-          Mobile Auto Spa · {SITE.serviceAreas.join(" + ")}
-        </div>
-        <div
-          style={{
-            display: "flex",
-            color: "#FFFFFF",
-            fontSize: 96,
-            letterSpacing: 8,
+            fontSize: 92,
+            letterSpacing: 14,
             textTransform: "uppercase",
             fontWeight: 800,
             lineHeight: 1,
           }}
         >
-          Crystal Coat
+          Crystal Coat Mobile
         </div>
         <div
           style={{
             display: "flex",
-            color: "#C9A227",
-            fontSize: 28,
-            letterSpacing: 14,
-            textTransform: "uppercase",
-            fontWeight: 600,
-            marginTop: 24,
-          }}
-        >
-          Mobile Auto Spa
-        </div>
-        <div
-          style={{
-            display: "flex",
-            color: "rgba(255,255,255,0.72)",
-            fontSize: 26,
-            marginTop: 56,
-            maxWidth: 800,
+            color: "rgba(255,255,255,0.78)",
+            fontSize: 30,
+            letterSpacing: 4,
+            marginTop: 40,
+            maxWidth: 900,
           }}
         >
           {SITE.tagline}
@@ -79,15 +53,14 @@ export default function OpenGraphImage() {
         <div
           style={{
             display: "flex",
-            position: "absolute",
-            bottom: 56,
             color: "rgba(255,255,255,0.55)",
-            fontSize: 18,
-            letterSpacing: 4,
+            fontSize: 20,
+            letterSpacing: 6,
             textTransform: "uppercase",
+            marginTop: 28,
           }}
         >
-          {SITE.url.replace(/^https?:\/\//, "")}
+          {SITE.serviceAreas.join(" · ")} · British Columbia
         </div>
       </div>
     ),

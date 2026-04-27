@@ -30,7 +30,7 @@ export function Logo({ variant = "dark", className, href = "/" }: LogoProps) {
         x="0"
         y="22"
         fill={primaryFill}
-        fontFamily='var(--font-heading), "Plus Jakarta Sans", system-ui, sans-serif'
+        style={{ fontFamily: 'var(--font-heading), "Plus Jakarta Sans", system-ui, sans-serif' }}
         fontWeight={800}
         fontSize={22}
         letterSpacing={4.2}
@@ -43,7 +43,7 @@ export function Logo({ variant = "dark", className, href = "/" }: LogoProps) {
         x="0"
         y="42"
         fill={accentFill}
-        fontFamily='var(--font-heading), "Plus Jakarta Sans", system-ui, sans-serif'
+        style={{ fontFamily: 'var(--font-heading), "Plus Jakarta Sans", system-ui, sans-serif' }}
         fontWeight={500}
         fontSize={9}
         letterSpacing={3.6}

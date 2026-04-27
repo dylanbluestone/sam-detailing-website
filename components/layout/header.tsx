@@ -163,7 +163,7 @@ export function Header() {
                     {pkg.name}
                     {pkg.popular && (
                       <span className="text-[10px] font-bold tracking-[0.18em] text-gold uppercase">
-                        Popular
+                        Most Popular
                       </span>
                     )}
                   </div>
