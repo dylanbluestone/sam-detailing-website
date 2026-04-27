@@ -5,6 +5,7 @@ export const SITE = {
   description:
     "Premium mobile auto detailing in Port Coquitlam and Coquitlam, BC. Hand wash, full interior steam clean, paint sealant, and more — booked in minutes, done at your driveway.",
   url: "http://localhost:3000", // swap to production domain when purchased
+  // OG image must be added at /public/og-image.jpg — 1200x630.
   ogImage: "/og-image.jpg",
   founded: 2025,
   serviceAreas: ["Port Coquitlam", "Coquitlam"] as const,
