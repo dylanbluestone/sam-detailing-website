@@ -9,7 +9,16 @@ export const metadata: Metadata = {
     "Request a mobile detailing appointment in Port Coquitlam or Coquitlam. We'll confirm by email or phone within a few hours.",
 };
 
-export default function BookPage() {
+export default async function BookPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ package?: string | string[] }>;
+}) {
+  const params = await searchParams;
+  const initialPackage = Array.isArray(params.package)
+    ? params.package[0]
+    : params.package;
+
   return (
     <div className="bg-bone">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pb-24">
@@ -41,7 +50,7 @@ export default function BookPage() {
         </div>
 
         <div className="mt-10 lg:mt-14">
-          <BookingForm />
+          <BookingForm initialPackage={initialPackage} />
         </div>
 
         <div className="mt-16 lg:mt-20 grid gap-6 sm:grid-cols-3 max-w-4xl border-t border-border pt-10">

@@ -71,6 +71,12 @@ type DefaultValues = Omit<BookingFormInput, "vehicleType" | "package"> & {
   package?: BookingInput["package"];
 };
 
+const PACKAGE_SLUGS = PACKAGES.map((p) => p.slug) as readonly BookingInput["package"][];
+
+function isPackageSlug(value: string | null | undefined): value is BookingInput["package"] {
+  return !!value && (PACKAGE_SLUGS as readonly string[]).includes(value);
+}
+
 const DEFAULTS: DefaultValues = {
   name: "",
   email: "",
@@ -128,9 +134,15 @@ function SectionHeader({
   );
 }
 
-export function BookingForm() {
+export function BookingForm({
+  initialPackage,
+}: {
+  initialPackage?: string;
+} = {}) {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
+
+  const presetPackage = isPackageSlug(initialPackage) ? initialPackage : undefined;
 
   const form = useForm<BookingFormInput, unknown, BookingFormOutput>({
     resolver: zodResolver(BookingSchema),
@@ -138,7 +150,10 @@ export function BookingForm() {
     // Cast through unknown because BookingFormInput requires vehicleType +
     // package, but the form starts with neither selected. RHF supports
     // DeepPartial defaults here.
-    defaultValues: DEFAULTS as unknown as BookingFormInput,
+    defaultValues: {
+      ...DEFAULTS,
+      ...(presetPackage ? { package: presetPackage } : {}),
+    } as unknown as BookingFormInput,
   });
 
   const {
