@@ -78,8 +78,16 @@ export default function RootLayout({
         className={`${inter.variable} ${plusJakartaSans.variable} min-h-full flex flex-col bg-background text-foreground`}
       >
         <LocalBusinessSchema />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:inline-flex focus:h-11 focus:items-center focus:gap-2 focus:rounded-lg focus:bg-gold focus:px-4 focus:font-display focus:font-bold focus:tracking-wide focus:text-ink focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-ink"
+        >
+          Skip to main content
+        </a>
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
         <Footer />
         <Toaster richColors position="top-right" />
       </body>

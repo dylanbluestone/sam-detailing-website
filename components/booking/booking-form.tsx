@@ -118,7 +118,7 @@ function SectionHeader({
     <div className="flex items-start gap-3">
       <span
         aria-hidden="true"
-        className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gold bg-gold/10 text-xs font-bold text-gold mt-0.5"
+        className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gold bg-navy text-xs font-bold text-gold mt-0.5"
       >
         {step}
       </span>
