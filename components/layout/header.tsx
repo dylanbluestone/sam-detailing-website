@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, Phone } from "lucide-react";
 import { Logo } from "./logo";
 import {
@@ -23,17 +24,47 @@ const NAV_AFTER_SERVICES = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
-export function Header() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+const SCROLL_THRESHOLD = 100;
 
+export function Header() {
+  const pathname = usePathname();
+  const [overHero, setOverHero] = useState(false);
+  const [scrolledPastThreshold, setScrolledPastThreshold] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
+
+  // Hero detection: page sets <* data-hero /> on its dark hero section.
+  // Header is transparent only while that hero is intersecting the viewport.
+  useEffect(() => {
+    setServicesOpen(false);
+    const hero =
+      typeof document !== "undefined"
+        ? document.querySelector<HTMLElement>("[data-hero]")
+        : null;
+
+    if (!hero) {
+      setOverHero(false);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setOverHero(entry?.isIntersecting ?? false),
+      { rootMargin: "-1px 0px 0px 0px", threshold: 0 },
+    );
+    observer.observe(hero);
+    setOverHero(hero.getBoundingClientRect().bottom > 0);
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  // Throttled scroll listener for the 100px threshold.
   useEffect(() => {
     let ticking = false;
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        setScrolled(window.scrollY > 100);
+        setScrolledPastThreshold(window.scrollY > SCROLL_THRESHOLD);
         ticking = false;
       });
     };
@@ -42,14 +73,37 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close services dropdown on outside click + Escape.
+  useEffect(() => {
+    if (!servicesOpen) return;
+    const onPointerDown = (e: MouseEvent) => {
+      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
+        setServicesOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setServicesOpen(false);
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [servicesOpen]);
+
+  const transparent = overHero && !scrolledPastThreshold;
+
+  const closeServices = useCallback(() => setServicesOpen(false), []);
+
   return (
     <header
-      data-scrolled={scrolled}
+      data-transparent={transparent}
       className={cn(
         "fixed inset-x-0 top-0 z-40 transition-colors duration-300",
-        scrolled
-          ? "bg-ink/95 backdrop-blur-sm border-b border-white/10"
-          : "bg-transparent"
+        transparent
+          ? "bg-transparent border-b border-transparent"
+          : "bg-ink/95 backdrop-blur-sm border-b border-white/10",
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
@@ -69,25 +123,41 @@ export function Header() {
             </Link>
           ))}
 
-          <div className="group relative">
+          <div
+            ref={servicesRef}
+            className="group relative"
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+          >
             <button
               type="button"
+              aria-haspopup="menu"
+              aria-expanded={servicesOpen}
+              aria-controls="header-services-menu"
+              onClick={() => setServicesOpen((v) => !v)}
               className="flex items-center gap-1 text-sm font-medium text-white/90 hover:text-gold transition-colors py-2"
-              aria-haspopup="true"
             >
               Services
-              <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+              <ChevronDown
+                className={cn(
+                  "h-3.5 w-3.5 transition-transform",
+                  servicesOpen && "rotate-180",
+                )}
+              />
             </button>
             <div
+              id="header-services-menu"
               role="menu"
-              className="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 absolute left-1/2 top-full -translate-x-1/2 mt-1 w-72 rounded-lg bg-ink border border-white/10 shadow-xl p-2 transition-opacity"
+              hidden={!servicesOpen}
+              className="absolute left-1/2 top-full -translate-x-1/2 mt-1 w-72 rounded-lg bg-ink border border-white/10 shadow-xl p-2"
             >
               {PACKAGES.map((pkg) => (
                 <Link
                   key={pkg.slug}
                   href={`/services/${pkg.slug}`}
                   role="menuitem"
-                  className="block rounded-md px-3 py-2 hover:bg-white/5 focus:bg-white/5 outline-none"
+                  onClick={closeServices}
+                  className="block rounded-md px-3 py-2 hover:bg-white/5 focus:bg-white/5 outline-none focus-visible:ring-1 focus-visible:ring-gold"
                 >
                   <div className="flex items-center justify-between text-sm font-semibold text-white">
                     {pkg.name}
@@ -106,7 +176,8 @@ export function Header() {
                 <Link
                   href="/services"
                   role="menuitem"
-                  className="block rounded-md px-3 py-2 text-xs font-medium text-gold hover:bg-white/5 focus:bg-white/5 outline-none"
+                  onClick={closeServices}
+                  className="block rounded-md px-3 py-2 text-xs font-medium text-gold hover:bg-white/5 focus:bg-white/5 outline-none focus-visible:ring-1 focus-visible:ring-gold"
                 >
                   See all services →
                 </Link>
@@ -131,7 +202,7 @@ export function Header() {
             className="flex items-center gap-1.5 text-sm font-medium text-white/90 hover:text-gold transition-colors"
             aria-label={`Call ${SITE.contact.primaryPhone.name} at ${SITE.contact.primaryPhone.number}`}
           >
-            <Phone className="h-4 w-4" />
+            <Phone className="h-4 w-4" aria-hidden="true" />
             {SITE.contact.primaryPhone.number}
           </a>
           <Link
@@ -247,8 +318,10 @@ export function Header() {
               <a
                 href={`tel:${SITE.contact.primaryPhone.tel}`}
                 className="py-4 flex items-center gap-2 text-sm font-medium text-gold hover:text-gold/80"
+                aria-label={`Call ${SITE.contact.primaryPhone.name} at ${SITE.contact.primaryPhone.number}`}
               >
-                <Phone className="h-4 w-4" /> {SITE.contact.primaryPhone.number}
+                <Phone className="h-4 w-4" aria-hidden="true" />
+                {SITE.contact.primaryPhone.number}
               </a>
             </nav>
             <div className="mt-auto p-5 border-t border-white/10">

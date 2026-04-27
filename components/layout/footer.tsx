@@ -9,6 +9,15 @@ const SERVICE_AREA_LINKS = [
   { city: "Coquitlam", href: "/mobile-detailing-coquitlam" },
 ] as const;
 
+function GoldDivider({ className = "" }: { className?: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={`h-px w-full bg-gradient-to-r from-transparent via-gold/40 to-transparent ${className}`}
+    />
+  );
+}
+
 function InstagramIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -49,8 +58,10 @@ export function Footer() {
       {/* CTA band */}
       <section
         aria-label="Book your detail"
-        className="bg-navy border-y border-white/10"
+        className="relative bg-navy"
       >
+        <GoldDivider className="absolute inset-x-0 top-0" />
+        <GoldDivider className="absolute inset-x-0 bottom-0" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-14 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div className="space-y-1">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
@@ -72,7 +83,7 @@ export function Footer() {
               href={`tel:${SITE.contact.primaryPhone.tel}`}
               className="inline-flex items-center justify-center h-12 px-6 rounded-lg border border-white/30 text-white font-medium tracking-wide hover:border-gold hover:text-gold transition-colors"
             >
-              <Phone className="mr-2 h-4 w-4" />
+              <Phone className="mr-2 h-4 w-4" aria-hidden="true" />
               {SITE.contact.primaryPhone.number}
             </a>
           </div>
@@ -82,7 +93,7 @@ export function Footer() {
       {/* Columns */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16 grid gap-10 md:gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
         {/* Brand */}
-        <div>
+        <div className="md:pr-6 md:border-r md:border-gold/15">
           <Logo variant="light" href="/" />
           <p className="mt-5 text-sm text-white/70 leading-relaxed">
             {SITE.tagline}
@@ -110,7 +121,7 @@ export function Footer() {
         </div>
 
         {/* Services */}
-        <div>
+        <div className="border-t border-gold/20 pt-8 sm:border-t-0 sm:pt-0 md:px-6 md:border-l-0 md:border-r md:border-gold/15">
           <h3 className="font-display text-sm font-bold tracking-[0.18em] uppercase text-gold">
             Services
           </h3>
@@ -137,7 +148,7 @@ export function Footer() {
         </div>
 
         {/* Contact */}
-        <div>
+        <div className="border-t border-gold/20 pt-8 sm:border-t-0 sm:pt-0 md:px-6 md:border-l-0 md:border-r md:border-gold/15">
           <h3 className="font-display text-sm font-bold tracking-[0.18em] uppercase text-gold">
             Contact
           </h3>
@@ -147,7 +158,7 @@ export function Footer() {
                 href={`tel:${SITE.contact.primaryPhone.tel}`}
                 className="flex items-center gap-2 text-white/80 hover:text-gold transition-colors"
               >
-                <Phone className="h-4 w-4 text-white/40" />
+                <Phone className="h-4 w-4 text-white/40" aria-hidden="true" />
                 <span>
                   {SITE.contact.primaryPhone.name} ·{" "}
                   {SITE.contact.primaryPhone.number}
@@ -159,7 +170,7 @@ export function Footer() {
                 href={`tel:${SITE.contact.secondaryPhone.tel}`}
                 className="flex items-center gap-2 text-white/80 hover:text-gold transition-colors"
               >
-                <Phone className="h-4 w-4 text-white/40" />
+                <Phone className="h-4 w-4 text-white/40" aria-hidden="true" />
                 <span>
                   {SITE.contact.secondaryPhone.name} ·{" "}
                   {SITE.contact.secondaryPhone.number}
@@ -171,7 +182,7 @@ export function Footer() {
                 href={`mailto:${SITE.contact.primaryEmail}`}
                 className="flex items-center gap-2 text-white/80 hover:text-gold transition-colors break-all"
               >
-                <Mail className="h-4 w-4 text-white/40 shrink-0" />
+                <Mail className="h-4 w-4 text-white/40 shrink-0" aria-hidden="true" />
                 <span>{SITE.contact.primaryEmail}</span>
               </a>
             </li>
@@ -190,7 +201,7 @@ export function Footer() {
         </div>
 
         {/* Service Areas */}
-        <div>
+        <div className="border-t border-gold/20 pt-8 sm:border-t-0 sm:pt-0 md:pl-6">
           <h3 className="font-display text-sm font-bold tracking-[0.18em] uppercase text-gold">
             Service Areas
           </h3>
@@ -201,7 +212,7 @@ export function Footer() {
                   href={area.href}
                   className="flex items-center gap-2 text-white/80 hover:text-gold transition-colors"
                 >
-                  <MapPin className="h-4 w-4 text-white/40" />
+                  <MapPin className="h-4 w-4 text-white/40" aria-hidden="true" />
                   {area.city}
                 </Link>
               </li>
@@ -214,18 +225,21 @@ export function Footer() {
       </div>
 
       {/* Bottom strip */}
-      <div className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/55">
-          <p>
-            © {year} {SITE.name}. All rights reserved.
-          </p>
-          <div className="flex items-center gap-5">
-            <Link href="/privacy" className="hover:text-gold transition-colors">
-              Privacy
-            </Link>
-            <Link href="/terms" className="hover:text-gold transition-colors">
-              Terms
-            </Link>
+      <div className="relative">
+        <GoldDivider className="absolute inset-x-0 top-0" />
+        <div className="border-t border-white/10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/55">
+            <p>
+              © {year} {SITE.name}. All rights reserved.
+            </p>
+            <div className="flex items-center gap-5">
+              <Link href="/privacy" className="hover:text-gold transition-colors">
+                Privacy
+              </Link>
+              <Link href="/terms" className="hover:text-gold transition-colors">
+                Terms
+              </Link>
+            </div>
           </div>
         </div>
       </div>

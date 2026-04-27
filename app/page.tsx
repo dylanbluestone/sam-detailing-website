@@ -5,6 +5,7 @@ export default function Home() {
   return (
     <section
       aria-label="Hero"
+      data-hero
       className="relative min-h-[100svh] bg-ink text-white overflow-hidden"
     >
       <div

@@ -30,6 +30,7 @@ export const metadata: Metadata = {
   description: SITE.description,
   applicationName: SITE.name,
   authors: [{ name: SITE.name }],
+  // OG + Twitter images are injected automatically by app/opengraph-image.tsx.
   openGraph: {
     type: "website",
     locale: "en_CA",
@@ -37,20 +38,11 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: `${SITE.name} — ${SITE.tagline}`,
     description: SITE.description,
-    images: [
-      {
-        url: SITE.ogImage,
-        width: 1200,
-        height: 630,
-        alt: `${SITE.name} — ${SITE.tagline}`,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: SITE.name,
     description: SITE.description,
-    images: [SITE.ogImage],
   },
   robots: {
     index: true,
@@ -80,11 +72,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${plusJakartaSans.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+    <html lang="en" className="h-full antialiased">
+      <body
+        className={`${inter.variable} ${plusJakartaSans.variable} min-h-full flex flex-col bg-background text-foreground`}
+      >
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
