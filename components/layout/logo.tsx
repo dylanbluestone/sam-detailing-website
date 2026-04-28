@@ -40,15 +40,14 @@ export function Logo({ variant = "dark", className, href = "/" }: LogoProps) {
         CRYSTAL COAT
       </text>
       <text
-        x="0"
-        y="42"
+        x={SVG_WIDTH / 2}
+        y={43}
         fill={accentFill}
         style={{ fontFamily: 'var(--font-heading), "Plus Jakarta Sans", system-ui, sans-serif' }}
         fontWeight={500}
-        fontSize={9}
-        letterSpacing={3.6}
-        textLength={SVG_WIDTH - 4}
-        lengthAdjust="spacingAndGlyphs"
+        fontSize={11}
+        letterSpacing={3.2}
+        textAnchor="middle"
       >
         MOBILE AUTO SPA
       </text>

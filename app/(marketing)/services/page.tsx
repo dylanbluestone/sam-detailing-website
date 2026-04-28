@@ -358,7 +358,7 @@ export default function ServicesPage() {
               href={`tel:${SITE.contact.primaryPhone.tel}`}
               className="font-semibold text-navy underline decoration-gold underline-offset-4 decoration-2"
             >
-              Call {SITE.contact.primaryPhone.name}
+              Call us
             </a>{" "}
             and ask — most things we can quote onsite.
           </p>

@@ -19,7 +19,7 @@ const PILLARS = [
   {
     Icon: MessageSquare,
     title: "Direct communication",
-    body: "Text or call Luc directly. No call centres, no runaround.",
+    body: "Text or call directly. No call centres, no runaround.",
   },
 ] as const;
 

@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowDown, ArrowRight, Phone, Sparkles } from "lucide-react";
+import { ArrowRight, Phone, Sparkles } from "lucide-react";
 
+import { BookYourDetailBand } from "@/components/sections/book-your-detail-band";
 import { CTABand } from "@/components/sections/cta-band";
 import { FAQSection } from "@/components/sections/faq-section";
 import { GalleryPreview } from "@/components/sections/gallery-preview";
@@ -69,11 +70,11 @@ export default function HomePage() {
             Mobile Auto Detailing · {SITE.serviceAreas.join(" + ")}
           </p>
           <h1 className="mt-6 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight max-w-4xl">
-            Premium mobile detailing in Port Coquitlam &amp; Coquitlam.
+            Premium mobile detailing in the Lower Mainland.
           </h1>
           <p className="mt-6 max-w-2xl text-base sm:text-lg md:text-xl text-white/80 leading-relaxed">
             We come to your driveway. Hand wash, full interior steam, paint
-            sealant — done while you live your day.
+            sealant. done while you enjoy your day.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
@@ -92,11 +93,7 @@ export default function HomePage() {
             </Link>
           </div>
           <p className="mt-6 text-sm text-white/65">
-            Or call{" "}
-            <span className="font-semibold text-white">
-              {SITE.contact.primaryPhone.name}
-            </span>{" "}
-            at{" "}
+            Or call at{" "}
             <a
               href={`tel:${SITE.contact.primaryPhone.tel}`}
               className="inline-flex items-center gap-1 font-bold text-gold underline decoration-gold/40 underline-offset-4 decoration-2 hover:text-white"
@@ -108,16 +105,6 @@ export default function HomePage() {
           </p>
         </div>
 
-        <a
-          href="#services"
-          aria-label="Scroll to services"
-          className="absolute left-1/2 bottom-7 -translate-x-1/2 inline-flex flex-col items-center gap-1.5 text-white/60 hover:text-gold transition-colors"
-        >
-          <span className="text-[10px] font-bold tracking-[0.28em] uppercase">
-            Scroll
-          </span>
-          <ArrowDown className="h-4 w-4 animate-bounce" aria-hidden="true" />
-        </a>
       </section>
 
       {/* SECTION 2 — Services preview */}
@@ -128,11 +115,17 @@ export default function HomePage() {
       {/* SECTION 3 — Gallery preview */}
       <GalleryPreview />
 
+      {/* First CTA — sits right after the gallery */}
+      <CTABand />
+
       {/* SECTION 4 — Why Crystal Coat */}
       <WhyCrystalCoat />
 
       {/* SECTION 5 — How it works */}
       <HowItWorks />
+
+      {/* Second CTA — directly under "Three steps", separated from the first */}
+      <BookYourDetailBand />
 
       {/* SECTION 6 — FAQ preview */}
       <FAQSection
@@ -143,8 +136,6 @@ export default function HomePage() {
         variant="preview"
       />
 
-      {/* SECTION 7 — Big CTA */}
-      <CTABand />
     </>
   );
 }

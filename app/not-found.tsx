@@ -54,7 +54,7 @@ export default function NotFound() {
           className="mt-8 inline-flex items-center gap-2 text-sm text-white/70 hover:text-gold transition-colors"
         >
           <Phone className="h-3.5 w-3.5" aria-hidden="true" />
-          Or call {SITE.contact.primaryPhone.name} at{" "}
+          Or call at{" "}
           <span className="font-bold text-gold">
             {SITE.contact.primaryPhone.number}
           </span>

@@ -50,7 +50,7 @@ export function CTABand({
             className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-lg border border-white/30 text-white font-medium hover:border-gold hover:text-gold transition-colors"
           >
             <Phone className="h-4 w-4" aria-hidden="true" />
-            Call {SITE.contact.primaryPhone.name} · {SITE.contact.primaryPhone.number}
+            Call · {SITE.contact.primaryPhone.number}
           </a>
         </div>
       </div>

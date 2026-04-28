@@ -33,6 +33,34 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const cancelScheduledClose = useCallback(() => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  }, []);
+
+  const openServices = useCallback(() => {
+    cancelScheduledClose();
+    setServicesOpen(true);
+  }, [cancelScheduledClose]);
+
+  const scheduleCloseServices = useCallback(() => {
+    cancelScheduledClose();
+    closeTimeoutRef.current = setTimeout(() => {
+      setServicesOpen(false);
+      closeTimeoutRef.current = null;
+    }, 180);
+  }, [cancelScheduledClose]);
+
+  // Always clean up the timeout on unmount.
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    };
+  }, []);
 
   // Hero detection: page sets <* data-hero /> on its dark hero section.
   // Header is transparent only while that hero is intersecting the viewport.
@@ -125,9 +153,16 @@ export function Header() {
 
           <div
             ref={servicesRef}
-            className="group relative"
-            onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
+            className="relative"
+            onMouseEnter={openServices}
+            onMouseLeave={scheduleCloseServices}
+            onFocus={openServices}
+            onBlur={(e) => {
+              // Close only if focus moves OUTSIDE this wrapper entirely.
+              if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                scheduleCloseServices();
+              }
+            }}
           >
             <button
               type="button"
@@ -135,7 +170,7 @@ export function Header() {
               aria-expanded={servicesOpen}
               aria-controls="header-services-menu"
               onClick={() => setServicesOpen((v) => !v)}
-              className="flex items-center gap-1 text-sm font-medium text-white/90 hover:text-gold transition-colors py-2"
+              className="flex items-center gap-1 text-sm font-medium text-white/90 hover:text-gold transition-colors py-2 outline-none focus-visible:text-gold"
             >
               Services
               <ChevronDown
@@ -145,42 +180,52 @@ export function Header() {
                 )}
               />
             </button>
+            {/* Wrapper sits flush against the trigger (top-full, no gap)
+                — pt-2 here is hover-friendly transparent space, not a
+                visual margin. The cursor can move freely from button
+                into menu without leaving the wrapper. */}
             <div
-              id="header-services-menu"
-              role="menu"
               hidden={!servicesOpen}
-              className="absolute left-1/2 top-full -translate-x-1/2 mt-1 w-72 rounded-lg bg-ink border border-white/10 shadow-xl p-2"
+              className="absolute left-1/2 top-full -translate-x-1/2 pt-2 z-50"
+              onMouseEnter={openServices}
+              onMouseLeave={scheduleCloseServices}
             >
-              {PACKAGES.map((pkg) => (
-                <Link
-                  key={pkg.slug}
-                  href={`/services/${pkg.slug}`}
-                  role="menuitem"
-                  onClick={closeServices}
-                  className="block rounded-md px-3 py-2 hover:bg-white/5 focus:bg-white/5 outline-none focus-visible:ring-1 focus-visible:ring-gold"
-                >
-                  <div className="flex items-center justify-between text-sm font-semibold text-white">
-                    {pkg.name}
-                    {pkg.popular && (
-                      <span className="text-[10px] font-bold tracking-[0.18em] text-gold uppercase">
-                        Most Popular
-                      </span>
-                    )}
-                  </div>
-                  <div className="mt-0.5 text-xs text-white/60">
-                    From ${pkg.startingPrice}
-                  </div>
-                </Link>
-              ))}
-              <div className="mt-1 border-t border-white/10 pt-1">
-                <Link
-                  href="/services"
-                  role="menuitem"
-                  onClick={closeServices}
-                  className="block rounded-md px-3 py-2 text-xs font-medium text-gold hover:bg-white/5 focus:bg-white/5 outline-none focus-visible:ring-1 focus-visible:ring-gold"
-                >
-                  See all services →
-                </Link>
+              <div
+                id="header-services-menu"
+                role="menu"
+                className="w-72 rounded-lg bg-ink border border-white/10 shadow-xl p-2"
+              >
+                {PACKAGES.map((pkg) => (
+                  <Link
+                    key={pkg.slug}
+                    href={`/services/${pkg.slug}`}
+                    role="menuitem"
+                    onClick={closeServices}
+                    className="block rounded-md px-3 py-2 hover:bg-white/5 focus:bg-white/5 outline-none focus-visible:ring-1 focus-visible:ring-gold"
+                  >
+                    <div className="flex items-center justify-between text-sm font-semibold text-white">
+                      {pkg.name}
+                      {pkg.popular && (
+                        <span className="text-[10px] font-bold tracking-[0.18em] text-gold uppercase">
+                          Most Popular
+                        </span>
+                      )}
+                    </div>
+                    <div className="mt-0.5 text-xs text-white/60">
+                      From ${pkg.startingPrice}
+                    </div>
+                  </Link>
+                ))}
+                <div className="mt-1 border-t border-white/10 pt-1">
+                  <Link
+                    href="/services"
+                    role="menuitem"
+                    onClick={closeServices}
+                    className="block rounded-md px-3 py-2 text-xs font-medium text-gold hover:bg-white/5 focus:bg-white/5 outline-none focus-visible:ring-1 focus-visible:ring-gold"
+                  >
+                    See all services →
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

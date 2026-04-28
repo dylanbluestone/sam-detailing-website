@@ -41,11 +41,7 @@ export default async function BookPage({
             We'll confirm by email or phone within a few hours.
           </p>
           <p className="mt-3 text-sm text-ink">
-            Or call{" "}
-            <span className="font-semibold">
-              {SITE.contact.primaryPhone.name}
-            </span>{" "}
-            at{" "}
+            Or call at{" "}
             <a
               href={`tel:${SITE.contact.primaryPhone.tel}`}
               className="inline-flex items-center gap-1 font-bold text-navy underline decoration-gold underline-offset-4 decoration-2 hover:text-blue"
