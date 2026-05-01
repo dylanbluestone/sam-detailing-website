@@ -48,7 +48,6 @@ export async function POST(request: Request) {
 
   const data = parsed.data;
 
-  // Critical: staff booking email. If this fails, surface a 500.
   try {
     await emailService.sendBookingRequest(data);
   } catch (err) {
@@ -57,13 +56,6 @@ export async function POST(request: Request) {
       { ok: false, error: FRIENDLY_500 },
       { status: 500 },
     );
-  }
-
-  // Best-effort: customer confirmation. Don't fail the request if this throws.
-  try {
-    await emailService.sendCustomerConfirmation(data);
-  } catch (err) {
-    console.error("[booking] sendCustomerConfirmation failed:", err);
   }
 
   return NextResponse.json({ ok: true }, { status: 200 });

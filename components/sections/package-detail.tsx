@@ -195,9 +195,10 @@ export function PackageDetail({ pkg }: { pkg: Package }) {
                 Duration
               </div>
               <p className="mt-2 text-sm text-ink leading-relaxed">
-                Typically <strong>{pkg.durationHours[0]}–{pkg.durationHours[1]} hours</strong>{" "}
-                onsite. We bring everything we need — water, power tools as
-                required, and our own supplies.
+                Typically <strong>2.5–3.5 hours</strong> onsite. We provide all
+                tools, equipment, and products required to complete the service.
+                You only need to provide access to a water hose and a power
+                outlet.
               </p>
             </div>
           </div>

@@ -6,7 +6,7 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Booking Received",
   description:
-    "Thanks — your booking request is in. We'll reply by email or text within a few hours to confirm your time. Crystal Coat Mobile Auto Spa, Port Coquitlam BC.",
+    "Thanks. Your booking request is in. We'll reply by email or text within a few hours to confirm your time. Crystal Coat Mobile Auto Spa, Port Coquitlam BC.",
   alternates: { canonical: "/book/thank-you" },
   robots: { index: false, follow: false },
 };

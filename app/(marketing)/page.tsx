@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     absolute: "Mobile Detailing in Port Coquitlam | Crystal Coat Mobile",
   },
   description:
-    "Premium mobile auto detailing in Port Coquitlam & Coquitlam, BC. Hand wash, interior steam clean, paint sealant — done at your driveway. Book online today.",
+    "Premium mobile auto detailing in Port Coquitlam & Coquitlam, BC. Hand wash, interior steam clean, paint sealant. Done at your driveway. Book online today.",
   alternates: { canonical: "/" },
 };
 
@@ -73,8 +73,8 @@ export default function HomePage() {
             Premium mobile detailing in the Lower Mainland.
           </h1>
           <p className="mt-6 max-w-2xl text-base sm:text-lg md:text-xl text-white/80 leading-relaxed">
-            We come to your driveway. Hand wash, full interior steam, paint
-            sealant. done while you enjoy your day.
+            We come to your driveway. Hand wash, interior steam, paint sealant.
+            Quality work guaranteed.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link

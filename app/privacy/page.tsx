@@ -62,8 +62,8 @@ export default function PrivacyPage() {
               <li>Your preferred date and time slot, and any free-text notes you add</li>
             </ul>
             <p className="mt-3">
-              We do not collect payment information through the website —
-              payment is taken in person on the day of service.
+              We do not collect payment information through the website.
+              Payment is taken in person on the day of service.
             </p>
             <p className="mt-3">
               We collect basic technical information automatically, such as
@@ -100,7 +100,7 @@ export default function PrivacyPage() {
               data handling and security practices apply to that storage.
             </p>
             <p className="mt-3">
-              We do not maintain a separate customer database — your booking
+              We do not maintain a separate customer database. Your booking
               email and any follow-up correspondence are the only records we
               keep. Old booking emails are deleted periodically when they're
               no longer needed.

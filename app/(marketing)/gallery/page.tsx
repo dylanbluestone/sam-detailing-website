@@ -54,8 +54,7 @@ export default function GalleryPage() {
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-white/80 leading-relaxed">
             Every detail done by hand in Port Coquitlam and Coquitlam. Tap any
-            photo to view it full size — use the arrow keys (or the buttons)
-            to scrub through the set.
+            photo to view it full size.
           </p>
         </div>
       </section>

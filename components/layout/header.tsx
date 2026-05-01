@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, Phone } from "lucide-react";
 import { Logo } from "./logo";
 import {
@@ -24,12 +23,7 @@ const NAV_AFTER_SERVICES = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
-const SCROLL_THRESHOLD = 100;
-
 export function Header() {
-  const pathname = usePathname();
-  const [overHero, setOverHero] = useState(false);
-  const [scrolledPastThreshold, setScrolledPastThreshold] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
@@ -62,45 +56,6 @@ export function Header() {
     };
   }, []);
 
-  // Hero detection: page sets <* data-hero /> on its dark hero section.
-  // Header is transparent only while that hero is intersecting the viewport.
-  useEffect(() => {
-    setServicesOpen(false);
-    const hero =
-      typeof document !== "undefined"
-        ? document.querySelector<HTMLElement>("[data-hero]")
-        : null;
-
-    if (!hero) {
-      setOverHero(false);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setOverHero(entry?.isIntersecting ?? false),
-      { rootMargin: "-1px 0px 0px 0px", threshold: 0 },
-    );
-    observer.observe(hero);
-    setOverHero(hero.getBoundingClientRect().bottom > 0);
-    return () => observer.disconnect();
-  }, [pathname]);
-
-  // Throttled scroll listener for the 100px threshold.
-  useEffect(() => {
-    let ticking = false;
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        setScrolledPastThreshold(window.scrollY > SCROLL_THRESHOLD);
-        ticking = false;
-      });
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   // Close services dropdown on outside click + Escape.
   useEffect(() => {
     if (!servicesOpen) return;
@@ -120,22 +75,14 @@ export function Header() {
     };
   }, [servicesOpen]);
 
-  const transparent = overHero && !scrolledPastThreshold;
-
   const closeServices = useCallback(() => setServicesOpen(false), []);
 
   return (
-    <header
-      data-transparent={transparent}
-      className={cn(
-        "fixed inset-x-0 top-0 z-40 transition-colors duration-300",
-        transparent
-          ? "bg-transparent border-b border-transparent"
-          : "bg-ink/95 backdrop-blur-sm border-b border-white/10",
-      )}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
-        <Logo variant="light" />
+    <header className="fixed inset-x-0 top-0 z-40 bg-ink/95 backdrop-blur-sm border-b border-white/10">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-1.5 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:justify-normal">
+        <div className="lg:justify-self-start">
+          <Logo />
+        </div>
 
         <nav
           aria-label="Primary"
@@ -241,7 +188,7 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-5">
+        <div className="hidden lg:flex lg:justify-self-end items-center gap-5">
           <a
             href={`tel:${SITE.contact.primaryPhone.tel}`}
             className="flex items-center gap-1.5 text-sm font-medium text-white/90 hover:text-gold transition-colors"

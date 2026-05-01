@@ -3,7 +3,7 @@ export const SITE = {
   shortName: "Crystal Coat Mobile",
   tagline: "Professional mobile detailing — we come to you",
   description:
-    "Premium mobile auto detailing in Port Coquitlam and Coquitlam, BC. Hand wash, full interior steam clean, paint sealant, and more — booked in minutes, done at your driveway.",
+    "Premium mobile auto detailing in Port Coquitlam and Coquitlam, BC. Hand wash, full interior steam clean, paint sealant, and more. Booked in minutes, done at your driveway.",
   url: "http://localhost:3000", // swap to production domain when purchased
   // OG image must be added at /public/og-image.jpg — 1200x630.
   ogImage: "/og-image.jpg",

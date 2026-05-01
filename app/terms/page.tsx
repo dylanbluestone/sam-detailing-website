@@ -46,7 +46,7 @@ export default function TermsPage() {
             <p>
               Submitting our booking form sends us a service request. It is
               not an automatically confirmed appointment. We confirm your
-              slot by replying to your email or text — usually within a few
+              slot by replying to your email or text, usually within a few
               hours during business hours. Until we reply, your booking is
               not yet scheduled.
             </p>
@@ -128,7 +128,7 @@ export default function TermsPage() {
               We take reasonable care while detailing your vehicle, including
               using safe products, low-pressure water, and microfiber
               materials chosen for paint safety. That said, detailing can
-              reveal — and is not designed to repair — pre-existing
+              reveal, and is not designed to repair, pre-existing
               conditions, including but not limited to:
             </p>
             <ul className="mt-3 list-disc pl-6 space-y-1.5">
@@ -157,7 +157,7 @@ export default function TermsPage() {
             <p>
               Mobile detailing depends on weather. We may reschedule or
               recommend rescheduling when conditions would meaningfully
-              affect service quality — heavy rain or snow, high winds,
+              affect service quality: heavy rain or snow, high winds,
               freezing temperatures, smoke advisories, or similar. We'll
               reach out as soon as we can if a reschedule is needed and work
               with you to find another time. There is no fee for a
@@ -175,7 +175,7 @@ export default function TermsPage() {
             <p>
               We may photograph completed work for our portfolio, social
               media, and website gallery. Photos focus on the vehicle and
-              its finish — not license plates, faces, or property
+              its finish, not license plates, faces, or property
               identifiers. If you'd prefer we don't photograph your vehicle,
               let us know in your booking notes or onsite and we'll skip it.
             </p>

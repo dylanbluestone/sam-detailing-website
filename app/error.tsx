@@ -40,7 +40,7 @@ export default function GlobalError({
         </h1>
         <p className="mt-6 max-w-xl text-base sm:text-lg text-white/75 leading-relaxed">
           The page hit an unexpected error. The fastest path to getting your
-          car booked is to call or text us directly — we'll handle it from
+          car booked is to call or text us directly. We'll handle it from
           there.
         </p>
         {error.digest && (

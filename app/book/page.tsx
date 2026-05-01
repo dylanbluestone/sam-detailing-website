@@ -61,7 +61,7 @@ export default async function BookPage({
           <ReassuranceItem
             Icon={Truck}
             title="Mobile service"
-            body="We come to you — driveway, work, anywhere with a parking spot."
+            body="We come to you. Driveway, work, anywhere with a parking spot."
           />
           <ReassuranceItem
             Icon={ShieldCheck}

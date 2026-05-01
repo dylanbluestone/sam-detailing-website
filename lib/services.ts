@@ -40,7 +40,7 @@ export const PACKAGES: Package[] = [
       { title: "Foam soap & prewash", detail: "Breaks down dirt safely before contact washing to reduce scratches." },
       { title: "Full interior vacuum", detail: "Deep vacuuming using specialized tools across all interior areas." },
       { title: "Dash, panels & surfaces cleaned", detail: "Removes buildup and restores a clean interior look." },
-      { title: "Steam clean", detail: "Vents, cracks, and cupholders — targets tight areas for deep cleaning and sanitation." },
+      { title: "Steam clean", detail: "Vents, cracks, and cupholders. Targets tight areas for deep cleaning and sanitation." },
       { title: "Hand wash & dry", detail: "Safe exterior contact wash with premium microfiber." },
       { title: "Wheels + tire shine", detail: "Removes brake dust and restores a clean, glossy finish." },
       { title: "Streak-free windows", detail: "All glass crystal clear inside and out." },
@@ -69,7 +69,7 @@ export const PACKAGES: Package[] = [
 
 export const ADD_ONS = [
   { slug: "engine-bay",       name: "Engine Bay Detail",       startingPrice: 40, description: "Safely cleans the engine bay for a fresh, detailed look." },
-  { slug: "odor-removal",     name: "Odor Removal",            startingPrice: 20, description: "Eliminates unwanted smells at the source, not just covering them." },
+  { slug: "odor-removal",     name: "Odor Removal",            startingPrice: 40, description: "Eliminates unwanted smells at the source, not just covering them." },
   { slug: "pet-hair",         name: "Pet Hair Removal",        startingPrice: 35, description: "Removes stubborn pet hair from carpets, seats, and tight areas." },
   { slug: "clay-bar",         name: "Clay Bar Treatment",      startingPrice: 60, description: "Extra paint decontamination for a smoother finish." },
   { slug: "paint-sealant",    name: "Paint Sealant Protection", startingPrice: 60, description: "Hydrophobic protective layer that repels water, enhances shine, and keeps your car cleaner longer." },

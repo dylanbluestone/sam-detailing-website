@@ -59,7 +59,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16 grid gap-10 md:gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
         {/* Brand */}
         <div className="md:pr-6 md:border-r md:border-gold/15">
-          <Logo variant="light" href="/" />
+          <Logo />
           <p className="mt-5 text-sm text-white/70 leading-relaxed">
             {SITE.tagline}
           </p>

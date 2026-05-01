@@ -1,61 +1,26 @@
-// Placeholder logo — replace this component's SVG output with the client's final logo file when delivered.
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-export type LogoVariant = "light" | "dark";
-
 type LogoProps = {
-  variant?: LogoVariant;
   className?: string;
   href?: string | null;
 };
 
-const SVG_WIDTH = 220;
-const SVG_HEIGHT = 50;
-
-export function Logo({ variant = "dark", className, href = "/" }: LogoProps) {
-  const primaryFill = variant === "light" ? "#FFFFFF" : "#0A0A0A";
-  const accentFill = "#C9A227";
-
-  const svg = (
-    <svg
-      viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
-      width={SVG_WIDTH}
-      height={SVG_HEIGHT}
-      role="img"
-      aria-label="Crystal Coat Mobile Auto Spa"
-      className={cn("h-9 w-auto sm:h-10", className)}
-    >
-      <text
-        x="0"
-        y="22"
-        fill={primaryFill}
-        style={{ fontFamily: 'var(--font-heading), "Plus Jakarta Sans", system-ui, sans-serif' }}
-        fontWeight={800}
-        fontSize={22}
-        letterSpacing={4.2}
-        textLength={SVG_WIDTH - 4}
-        lengthAdjust="spacingAndGlyphs"
-      >
-        CRYSTAL COAT
-      </text>
-      <text
-        x={SVG_WIDTH / 2}
-        y={43}
-        fill={accentFill}
-        style={{ fontFamily: 'var(--font-heading), "Plus Jakarta Sans", system-ui, sans-serif' }}
-        fontWeight={500}
-        fontSize={11}
-        letterSpacing={3.2}
-        textAnchor="middle"
-      >
-        MOBILE AUTO SPA
-      </text>
-    </svg>
+export function Logo({ className, href = "/" }: LogoProps) {
+  const image = (
+    <Image
+      src="/logo.png"
+      alt="Crystal Coat Mobile Auto Spa"
+      width={313}
+      height={313}
+      priority
+      className={cn("h-12 w-12 sm:h-14 sm:w-14", className)}
+    />
   );
 
   if (href === null) {
-    return svg;
+    return image;
   }
 
   return (
@@ -64,7 +29,7 @@ export function Logo({ variant = "dark", className, href = "/" }: LogoProps) {
       aria-label="Crystal Coat Mobile Auto Spa — home"
       className="inline-flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
     >
-      {svg}
+      {image}
     </Link>
   );
 }

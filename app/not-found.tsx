@@ -31,7 +31,7 @@ export default function NotFound() {
         </h1>
         <p className="mt-6 max-w-xl text-base sm:text-lg text-white/75 leading-relaxed">
           Either the link is wrong, or we moved something. Try the home page,
-          jump straight to booking, or call us — whichever's fastest.
+          jump straight to booking, or call us. Whichever's fastest.
         </p>
         <div className="mt-10 grid w-full gap-3 sm:grid-cols-2 max-w-md">
           <Link

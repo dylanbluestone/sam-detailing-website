@@ -55,7 +55,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: { icon: "/favicon.ico" },
   alternates: { canonical: SITE.url },
   category: "automotive",
 };

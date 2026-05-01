@@ -8,7 +8,7 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About — Mobile Detailing in BC",
   description:
-    "Crystal Coat Mobile is a premium mobile detailing service in Port Coquitlam, BC. Deep interior cleaning, hand-detailed exterior — done at your driveway by Luc and Sam.",
+    "Crystal Coat Mobile is a premium mobile detailing service in Port Coquitlam, BC. Deep interior cleaning, hand-detailed exterior, done at your driveway by Luc and Sam.",
   alternates: { canonical: "/about" },
 };
 
@@ -18,7 +18,7 @@ const TEAM = [
     role: "Founder & Detailer",
     phone: SITE.contact.primaryPhone.number,
     tel: SITE.contact.primaryPhone.tel,
-    bio: "Luc handles bookings, scheduling, and most details on the road. Easiest way to reach us — text or call directly.",
+    bio: "Luc handles bookings, scheduling, and most details on the road. Easiest way to reach us is to text or call directly.",
   },
   {
     name: SITE.contact.secondaryPhone.name,
@@ -69,13 +69,13 @@ export default function AboutPage() {
             fresh, like-new feeling.
           </p>
           <p>
-            It's not just about having a clean car — it's about how it feels
-            to drive something that looks taken care of again.
+            It's not just about having a clean car. It's about how it feels to
+            drive something that looks taken care of again.
           </p>
           <p>
             We take our time with every detail, making sure your interior
             feels refreshed and your exterior has that clean, glossy finish.
-            Best part — we come to you, so it's simple and convenient.
+            And the best part is we come to you, so it's simple and convenient.
           </p>
           <p className="font-display text-xl font-bold text-navy">
             Reliable, high-quality service built on real results.
@@ -99,7 +99,7 @@ export default function AboutPage() {
           </h2>
           <p className="mt-4 max-w-2xl text-base text-muted-foreground leading-relaxed">
             Direct communication is part of why we exist. Skip the call
-            centre — text or call us yourself.
+            centre. Text or call us yourself.
           </p>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
