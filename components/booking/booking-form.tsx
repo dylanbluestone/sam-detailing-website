@@ -161,7 +161,6 @@ export function BookingForm({
     control,
     handleSubmit,
     watch,
-    setError,
     formState: { errors },
   } = form;
 
@@ -204,44 +203,72 @@ export function BookingForm({
   const onValid: SubmitHandler<BookingFormOutput> = async (data) => {
     setSubmitting(true);
     try {
-      const res = await fetch("/api/booking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const pkg = PACKAGES.find((p) => p.slug === data.package)!;
+      const price = pkg.pricing[data.vehicleType];
+      const addOnList =
+        data.addOns
+          .map((slug) => ADD_ONS.find((a) => a.slug === slug))
+          .filter(Boolean)
+          .map((a) => `${a!.name} (from $${a!.startingPrice})`)
+          .join(", ") || "None";
 
-      const json = (await res.json()) as {
-        ok: boolean;
-        error?: string;
-        debug?: string;
-        fieldErrors?: Record<string, string[] | undefined>;
-        formErrors?: string[];
+      const dateLabel = format(
+        parse(data.preferredDate, "yyyy-MM-dd", new Date()),
+        "EEEE, MMMM d, yyyy",
+      );
+      const slotLabel = format(
+        parse(data.preferredSlot, "HH:mm", new Date()),
+        "h:mm a",
+      );
+
+      const payload = {
+        _subject: `New Booking: ${data.name}, ${dateLabel} ${slotLabel}`,
+        _replyto: data.email,
+        _template: "table",
+        _honey: data.website ?? "",
+        Name: data.name,
+        Email: data.email,
+        Phone: data.phone,
+        Address: data.address,
+        City: data.city,
+        "Vehicle Type": VEHICLE_LABELS[data.vehicleType],
+        "Vehicle Details": data.vehicleMakeModel || "(not provided)",
+        Package: `${pkg.name}, $${price} (${VEHICLE_LABELS[data.vehicleType]} pricing)`,
+        "Add-ons": addOnList,
+        "Preferred Date": dateLabel,
+        "Preferred Time": slotLabel,
+        "Alternate Time": data.alternateTime || "(none)",
+        Notes: data.notes || "(none)",
       };
 
-      if (!res.ok || !json.ok) {
-        console.error("[booking-form] server response:", json);
-        if (json.fieldErrors) {
-          Object.entries(json.fieldErrors).forEach(([field, msgs]) => {
-            if (Array.isArray(msgs) && msgs.length > 0) {
-              setError(field as keyof BookingInput, {
-                type: "server",
-                message: msgs[0],
-              });
-            }
-          });
-        }
-        toast.error(json.error ?? "Couldn't submit your request.", {
-          description: json.debug
-            ? `Debug: ${json.debug}`
-            : `Call ${SITE.contact.primaryPhone.name} at ${SITE.contact.primaryPhone.number} and we'll book you in directly.`,
-        });
-        return;
+      const res = await fetch(
+        `https://formsubmit.co/ajax/${SITE.contact.primaryEmail}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      if (!res.ok) {
+        throw new Error(`FormSubmit returned HTTP ${res.status}`);
+      }
+
+      const json = (await res.json()) as {
+        success?: string;
+        message?: string;
+      };
+      if (json.success !== "true") {
+        throw new Error(json.message ?? "FormSubmit rejected the submission");
       }
 
       router.push("/book/thank-you");
     } catch (err) {
       console.error("[booking-form] submit failed:", err);
-      toast.error("Couldn't reach our server.", {
+      toast.error("Couldn't submit your request.", {
         description: `Call ${SITE.contact.primaryPhone.name} at ${SITE.contact.primaryPhone.number} and we'll book you in directly.`,
       });
     } finally {
