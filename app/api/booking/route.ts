@@ -51,9 +51,10 @@ export async function POST(request: Request) {
   try {
     await emailService.sendBookingRequest(data);
   } catch (err) {
+    const debug = err instanceof Error ? err.message : String(err);
     console.error("[booking] sendBookingRequest failed:", err);
     return NextResponse.json(
-      { ok: false, error: FRIENDLY_500 },
+      { ok: false, error: FRIENDLY_500, debug },
       { status: 500 },
     );
   }
