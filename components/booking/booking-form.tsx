@@ -213,11 +213,13 @@ export function BookingForm({
       const json = (await res.json()) as {
         ok: boolean;
         error?: string;
+        debug?: string;
         fieldErrors?: Record<string, string[] | undefined>;
         formErrors?: string[];
       };
 
       if (!res.ok || !json.ok) {
+        console.error("[booking-form] server response:", json);
         if (json.fieldErrors) {
           Object.entries(json.fieldErrors).forEach(([field, msgs]) => {
             if (Array.isArray(msgs) && msgs.length > 0) {
@@ -229,7 +231,9 @@ export function BookingForm({
           });
         }
         toast.error(json.error ?? "Couldn't submit your request.", {
-          description: `Call ${SITE.contact.primaryPhone.name} at ${SITE.contact.primaryPhone.number} and we'll book you in directly.`,
+          description: json.debug
+            ? `Debug: ${json.debug}`
+            : `Call ${SITE.contact.primaryPhone.name} at ${SITE.contact.primaryPhone.number} and we'll book you in directly.`,
         });
         return;
       }
